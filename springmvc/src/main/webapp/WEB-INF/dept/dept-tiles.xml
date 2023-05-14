@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<!-- member작업에 관련된 view만 등록 -->
+	<!-- emp등록페이지 보기 뷰 
+		등록된 템플릿에서 영역마다 교체할 뷰 정보만 정의하면 된다.
+		
+		==> mainTemplate 구조를 그대로 쓸건데 name 속성이 content로 정의해놓은 영역만 /WEB-INF/member/register.jsp로 바꿀게~ 라는 뜻이다.
+	-->
+	<definition name="deptlist" extends="mainTemplate">
+		<put-attribute name="content" value="/WEB-INF/tilesview/deptlist.jsp"></put-attribute>
+	</definition>
+</tiles-definitions>
