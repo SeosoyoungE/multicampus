@@ -4,6 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.multi.erp.board">
   <!-- #{}으로 변수를 연결하면 PreparedStatement의 ?와 연결 -->
+  	<insert id="fileinsert" parameterType="java.util.List">
+  		insert into board_file values
+  		<foreach collection="list" item="file" separator=",">
+  			(last_insert_id(),#{file.originalFilename},#{file.storeFilename},#{file.boardFileno})
+  		</foreach>
+  	</insert>
   	<insert id="insert" parameterType="board"> <!-- mybatis-config.xml에 알리아스를 정의했기때문에 알리아스 명만 parameter(변수)에 등록 -->
   		insert into tbboard
   		values(null,#{id},sysdate(),#{title},#{content},#{category})

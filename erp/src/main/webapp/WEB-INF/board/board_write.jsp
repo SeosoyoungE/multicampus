@@ -25,7 +25,8 @@
 			<div class="form-panel">
 			
 				<form class="form-horizontal style-form" 
-					action="/erp/board/write" method="post">
+					action="/erp/board/write" method="post"
+					enctype="multipart/form-data">
 					<div class="form-group" style="border: 1px solid #eff2f7;">
 						
 						<label class="col-sm-2 col-sm-2 control-label">작성자</label>
@@ -59,6 +60,51 @@
 									style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
 									rows=15 name="content">글작성</textarea>
 
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2 text-right">
+								<label for="files" class="control-label">파일1</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control input-lg" name="files"
+									id="files" placeholder="파일선택" multiple="multiple">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2 text-right">
+								<label for="title" class="control-label">파일2</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control input-lg" name="files"
+									id="title" placeholder="파일선택">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2 text-right">
+								<label for="files" class="control-label">파일3</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control input-lg" name="files"
+									id="files" placeholder="파일선택">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2 text-right">
+								<label for="files" class="control-label">파일4</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control input-lg" name="files"
+									id="files" placeholder="파일선택">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-2 text-right">
+								<label for="title" class="control-label">파일5</label>
+							</div>
+							<div class="col-md-8">
+								<input type="file" class="form-control input-lg" name="files"
+									id="title" placeholder="파일선택">
 							</div>
 						</div>
 						<div class="form-group">

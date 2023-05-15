@@ -69,5 +69,24 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return list;
 	}
+	//게시글등록버튼을 눌렀을때 실행될 메소드
+	
+	public int insert(BoardDTO board, List<BoardFileDTO> boardfiledtolist) {
+		dao.insert(board);
+		dao.insertFile(boardfiledtolist);
+		return 0;
+	}
+	
+	@Override
+	public List<BoardFileDTO> getFileList(String boardno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BoardFileDTO getFile(BoardFileDTO inputdata) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

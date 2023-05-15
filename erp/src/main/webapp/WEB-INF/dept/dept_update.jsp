@@ -1,4 +1,4 @@
-<%@page import="com.multi.dao.dept.DeptDTO"%>
+<%@page import="kr.multi.erp.dept.DeptDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 

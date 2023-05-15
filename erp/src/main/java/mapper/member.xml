@@ -5,7 +5,11 @@
   
 <mapper namespace="com.multi.erp.member">
 	<select id="login" parameterType="String" resultType="member">
-		select * from member2
+		select m.*, d.deptname, j.menupath, j.job_category
+		from member2 m, dept d,job j
 		where id=#{id} and pass=#{pass}
+		<!-- 조인조건 -->
+		and m.deptno=d.deptno  
+		and d.job_category=j.job_id
 	</select>
 </mapper>

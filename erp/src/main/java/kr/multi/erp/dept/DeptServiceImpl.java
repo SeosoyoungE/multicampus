@@ -1,19 +1,17 @@
-package com.multi.dao.dept;
+package kr.multi.erp.dept;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
 public class DeptServiceImpl implements DeptService {
-
 	@Autowired
 	DeptDAO dao;
 	
 	@Override
 	public int insert(DeptDTO dept) {
-		return 0;
+		return dao.insert(dept);
 	}
 
 	@Override
@@ -28,8 +26,7 @@ public class DeptServiceImpl implements DeptService {
 
 	@Override
 	public int delete(String deptno) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(deptno);
 	}
 
 	@Override
@@ -39,8 +36,9 @@ public class DeptServiceImpl implements DeptService {
 
 	@Override
 	public int update(DeptDTO dept) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(dept);
 	}
+
+
 
 }

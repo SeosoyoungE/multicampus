@@ -12,6 +12,7 @@ public class BoardDTO {
 	String title;
 	String content;
 	String category;
+	List<MultipartFile> files;
 	
 	public BoardDTO() {
 		
@@ -25,16 +26,11 @@ public class BoardDTO {
 		this.content = content;
 		this.category = category;
 	}
-	
-
-	
 	@Override
 	public String toString() {
 		return "BoardDTO [board_no=" + board_no + ", id=" + id + ", write_date=" + write_date + ", title=" + title
-				+ ", content=" + content + ", category=" + category +"]";
+				+ ", content=" + content + ", category=" + category + ", files=" + files + "]";
 	}
-	
-	
 	public String getBoard_no() {
 		return board_no;
 	}
@@ -73,5 +69,12 @@ public class BoardDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
+	
 	
 }

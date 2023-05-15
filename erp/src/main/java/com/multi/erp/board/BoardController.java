@@ -1,5 +1,7 @@
 package com.multi.erp.board;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,32 +12,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.multi.erp.member.MemberDTO;
+import com.mysql.cj.Session;
 
 @Controller
 public class BoardController {
 	BoardService service;
+	FileUploadLogicService fileuploadservice;
+	
 	public BoardController() {
 		
 	}
-	
 	@Autowired
-	public BoardController(BoardService service) {
+	public BoardController(BoardService service, FileUploadLogicService fileuploadservice) {
 		super();
 		this.service = service;
+		this.fileuploadservice = fileuploadservice;
 	}
+	
+	
 	@GetMapping("/board/write")
 	public String writePage() {
 		return "board/writepage"; //view
 	}
 	@PostMapping("/board/write")
-	private String write(BoardDTO board) {
+	private String write(BoardDTO board, HttpSession session) throws IllegalStateException, IOException {
 		System.out.println(board);
-		service.insert(board);
-		System.out.println(board);
-		return "redirect:/board/list.do"; //컨트롤러요청재지정
+		//1. MultipartFile정보를 추출
+		List<MultipartFile> files=board.getFiles();
+		//2. 업로드될 서버릐 경로 추출
+		// - 실제 서버의 경로를 추출하기 위해사 Context객체의 정보를 담고 있는 ServletContext객체를 추출
+		// - ServletContext가 우리가 웹에서 운영할 프로젝트에 대한 정보를 담고 있는 객체이고
+		// 실제경로를 구할 수 있는 메소드가 있음
+		String path= WebUtils.getRealPath(session.getServletContext(), "/WEB-INF/upload");
+		System.out.println("path: "+path);
+		//3. 업로드로직을 구현해서 업로드 되도록 처리
+		List<BoardFileDTO> boardfiledtolist= fileuploadservice.uploadFiles(files, path);
+		//4. 게시글에 대한 일반적인 내용과 첨부파일이 있는 경우 첨부되는 파일의 정보를 담은 List<BoardFileDTO>를 디비에 저장하기위해 서비스에 전달
+		service.insert(board,boardfiledtolist);
+		
+		return "redirect:/board/list.do?category=all"; //컨트롤러요청재지정
 	}
 	@RequestMapping("/board/list.do")
 	public ModelAndView list(String category) {
@@ -74,7 +94,7 @@ public class BoardController {
 			view="redirect:/emp/login.do";
 		} else {
 			int result=service.delete(board_no);
-			view="redirect:/board/list.do";
+			view="redirect:/board/list.do?category=all";
 		}
 		return view;
 	}

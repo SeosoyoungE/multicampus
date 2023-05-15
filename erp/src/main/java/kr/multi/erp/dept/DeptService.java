@@ -1,4 +1,4 @@
-package com.multi.dao.dept;
+package kr.multi.erp.dept;
 
 import java.util.List;
 
@@ -10,4 +10,6 @@ public interface DeptService {
 	public int delete(String deptno);
 	public DeptDTO read(String deptno);
 	int update(DeptDTO dept);
+	// 부서등록- 부서 일반 등록, 첨부파일 디비
+
 }

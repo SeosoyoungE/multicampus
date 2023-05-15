@@ -69,10 +69,19 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
+	// 컨트롤러 
 	@Override
 	public MemberDTO login(MemberDTO loginUser) {
-		// TODO Auto-generated method stub
-		return dao.login(loginUser);
+		MemberDTO user =dao.login(loginUser);
+		System.out.println(user);
+		//db에서 가져온 값에서 menupath를 가공해서 뷰의 이름을 사용
+		if(user!=null) {
+			String menupath = user.getMenupath();
+			menupath=menupath.substring(menupath.indexOf("/")+1,menupath.indexOf("_"));
+			user.setMenupath(menupath);
+		}
+		System.out.println("후: "+user);
+		return user;
 	}
 
 }

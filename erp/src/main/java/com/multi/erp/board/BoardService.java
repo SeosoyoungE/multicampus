@@ -6,6 +6,7 @@ public interface BoardService {
 	//게시글등록  - tbboard테이블과 board_file테이블에 저장
 	/* int insert(BoardDTO board,List<BoardFileDTO> boardfiledtolist); */
 	int insert(BoardDTO board);
+	public int insert(BoardDTO board, List<BoardFileDTO> boardfiledtolist);
 	//게시글목록보기
 	List<BoardDTO> boardList();
 	//게시글상세조회
@@ -22,8 +23,8 @@ public interface BoardService {
 	List<BoardDTO> findByCategory(String category);
 	
 	//게시글을 상세보기한 경우 보여질 업로드한 파일의 목록 조회
-	/*
-	 * List<BoardFileDTO> getFileList(String boardno); BoardFileDTO
-	 * getFile(BoardFileDTO inputdata);
-	 */
+	
+	  List<BoardFileDTO> getFileList(String boardno); 
+	  BoardFileDTO getFile(BoardFileDTO inputdata);
+	 
 }

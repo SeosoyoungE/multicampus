@@ -44,7 +44,7 @@ body {
 				style="background-color: white; margin-right: 10px; padding: 0px">
 				<div style="border-color: white; height: 800px;">
 					<div
-						style="background-color: #63cde7; padding: 20px; font-family: HY-견고딕; font-size: 16pt; color: white; font-weight: bolder;">${loginUser.job_category}</div>
+						style="background-color: #63cde7; padding: 20px; font-family: HY-견고딕; font-size: 16pt; color: white; font-weight: bolder;">${user.job_category}</div>
 
 					<tiles:insertAttribute name="menu"></tiles:insertAttribute>
 				</div>

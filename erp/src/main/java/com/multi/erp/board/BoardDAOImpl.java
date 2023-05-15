@@ -76,5 +76,23 @@ public class BoardDAOImpl implements BoardDAO {
 		System.out.println("=====dao====="+list.size());
 		return list;
 	}
+
+	@Override
+	public int insertFile(List<BoardFileDTO> boardfiledtolist) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.insert("com.multi.erp.board.fileinsert",boardfiledtolist);
+	}
+
+	@Override
+	public List<BoardFileDTO> getFileList(String boardno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public BoardFileDTO getFile(BoardFileDTO inputdata) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

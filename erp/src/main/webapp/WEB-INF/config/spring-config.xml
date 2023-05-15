@@ -50,7 +50,7 @@
 	</beans:bean>
 
 	<context:component-scan
-		base-package="com , main" />
+		base-package="com , main, kr" />
 		
 <!-- Spring DB를 위해 필요한 라이브러리들 -->
 			<!-- =======spring jdbc - Connection 설정======== -->
@@ -90,8 +90,12 @@
 	<beans:bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg ref="sqlSessionFactory"/>
 	</beans:bean>
-	
-	
+		
+	<!--					 파일업로드						 -->
+	<beans:bean id="multipartResolver" 
+            class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="4000000"/>
+    </beans:bean>
 	
 	
 </beans:beans>
