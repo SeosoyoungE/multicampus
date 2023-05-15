@@ -14,7 +14,7 @@
   	<select id="categorySearch" parameterType="String" resultType="board">
   		select * from tbboard where category=#{category}
   	</select>
-  	<select id="search" resultType="board" parameterType="String"> <!-- 한개의 결과만 나오도록 조건에 들어갈 파라미터 추가 -->
+  	<select id="search" resultType="board" parameterType="String">
   		select * from tbboard where title like concat('%', #{title},'%')
   	</select>
   	<select id="read" resultType="board" parameterType="String"> <!-- 한개의 결과만 나오도록 조건에 들어갈 파라미터 추가 -->
