@@ -20,7 +20,7 @@
 	<resources mapping="/images/**" location="/WEB-INF/static/images/" />
 	<resources mapping="/css/**" location="/WEB-INF/static/common/css/" />
 	<resources mapping="/js/**" location="/WEB-INF/static/common/js/" />
-
+	<resources mapping="/upload/**" location="/WEB-INF/upload/"/>
 
 
 	<beans:bean id="tilesConfigurer"

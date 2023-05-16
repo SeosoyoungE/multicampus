@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" session="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE>
 <html>
@@ -60,6 +61,20 @@ $(document).ready(function() {
 			</div>
 			<div class="col-md-8">${board.title }</div>
 		</div>
+		<div class="form-group">
+			<div class="col-md-2 text-right">
+				<label for="title" class="control-label">첨부파일</label>
+			</div>
+			<div class="col-md-8">
+				<!-- 디비에 저장된 파일명을 출력 -->
+				<c:forEach var="file" items="${boardfiledtolist}">
+					<h5><a href="/erp/board/download/${board.id}/${board.board_no}/${file.boardFileno}">${file.originalFilename }</a></h5>
+					<img alt="" src="/erp/upload/${file.storeFilename}" width="300">
+				</c:forEach>
+			</div>
+		</div>
+		
+		
 		<div class="form-group">
 			<div class="col-md-2 text-right">
 				<label for="title" class="control-label">작성날짜</label>
