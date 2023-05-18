@@ -9,7 +9,27 @@
 <meta charset="UTF-8">
 	<title>Insert title here</title>
 	<script type="text/javascript">
-		
+		$(document).ready(function() {
+			$(".form-control").each(function(){
+				var opt =""
+				$.ajax({
+					url: "/erp/emp/insert",
+					type: "get",
+					success:function(data){
+						for(i=0;i<data.length;i++){
+							opt = <option value='#(deptno)}'>인사팀</option>
+							$(".form-control").
+						}
+					}
+				})
+			})
+			$("#id").on("keyup",function(){
+				var 
+				$.ajax({
+					url: "/erp/emp/"
+				})
+			})
+		})
 	</script>
  </head>
 	
@@ -38,6 +58,23 @@
 						<label class="control-label col-sm-2" for="orgcode">부서코드</label>
 						<div class="col-sm-3">
 							<select name="deptno" class="form-control" >
+								<option value="">인사팀</option>
+								<option value="">재무팀</option>
+								<option value="">개발팀</option>
+								<option value="">디자인팀</option>
+								<option value="">Ajax팀</option>
+								<option value="">개발지원</option>
+								<option value="">시스템지원팀</option>
+								<option value="">총무과</option>
+								<option value="">경영지원본부</option>
+								<option value="">영업본부</option>
+								<option value="">IT지원센터</option>
+								<option value="">교육부</option>
+								<option value="">기획실</option>
+								<option value="">영업1팀</option>
+								<option value="">기업영업본부</option>
+								<option value="">영업2팀</option>
+								<option value="">마케팅실</option>
 							</select>
 						</div>
 					</div>

@@ -1,15 +1,21 @@
 package com.multi.erp.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.multi.erp.dept.DeptDTO;
+import kr.multi.erp.dept.DeptService;
 
 @Controller
 @RequestMapping("/emp") //중복되는 부분을 쓸수있다.
@@ -23,6 +29,17 @@ public class MemberController {
 		super();
 		this.service = service;
 	}
+	
+	@Autowired
+	DeptService deptService;
+	
+	@RequestMapping("/emp/insert")
+	public String insertPage(Model model) {
+		List<DeptDTO> deptlist = deptService.select();
+		model.addAttribute("deptlist", deptlist);
+		return "member/insertPage";
+	}
+	
 	@GetMapping("/login.do")
 	public String login() {
 		return "login";

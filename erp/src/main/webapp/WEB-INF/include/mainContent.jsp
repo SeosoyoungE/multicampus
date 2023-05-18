@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="/erp/common/css/main.css" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -19,8 +19,48 @@
 	margin-bottom: 0;
 	border-radius: 0;
 }
-
 </style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//id가 boardCategory인 엘리먼트의 하위 멜리먼트인 모든 li태그에 동일한 코드를 적용
+		$("#boardCategory>li").each(function(){
+			//li가 클릭될때마다 alert실행
+			$(this).click(function() {
+				//alert("선택!!")
+				category=$(this).text();
+				//기존 선택된 li에 대한 active속성을 지우기
+				$("#boardCategory>li").removeAttr("class")
+				$(this).attr("class","active")
+				$.ajax({
+					url: "/erp/board/ajax/list.do",
+					type: "get",
+					data:{
+						"category":category
+					},
+					success:function(data){
+						//ajax 요청으로 category별 게시판 데이터를 받아옴
+						/* alert(data.length+"----"+data[0].id)
+						<tr>
+						<td class="boardContent" style="">
+						<a href="/erp/board/read.do?board_no=${board.board_no}&state=READ">${board.title}</a></td>
+						<td class="boardDate" style="">${board.write_date}</td>
+					</tr> */
+						printdata=""
+						for(i=0;i<data.length;i++){
+							//조회한 레코드 갯수만큼 출력할 뷰를 만들기
+							printdata+="<tr><td class='boardContent' style=''>"+
+							"<a href='/erp/board/read.do?board_no="+data[i].board_no+"&state=READ'>"+
+							data[i].title+"</a></td>"+
+							"<td class='boardDate' style=''>"+data[i].write_date+"</td></tr>"
+						}
+						$("#mydatalist").empty();
+						$("#mydatalist").append(printdata)
+					}
+				})
+			})
+		})
+	})
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -55,7 +95,7 @@
 
 						</div>
 
-						
+
 					</div>
 
 					<!-- Left and right controls -->
@@ -75,30 +115,20 @@
 					style="border-color: #edeef1; height: 300px; width: 450px">
 					<div class="panel-footer">사내소식</div>
 					<div class="panel-body">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#">최근게시판</a></li>
-							<li><a href="#">업무공지</a></li>
+						<ul class="nav nav-tabs" id="boardCategory">
+							<li class="active"><a href="#">게시판</a></li>
+							<li><a href="#">사내소식</a></li>
 							<li><a href="#">경조사</a></li>
 						</ul>
 						<div id="boardMain" style="padding-top: 20px; padding-left: 10px">
-							<table>
-								<tr>
-									<td class="boardContent" style="">mini프로젝트 개최</td>
-									<td class="boardDate" style="">2023.5.30</td>
-								</tr>
-								<tr>
-									<td class="boardContent" style="">kimsaemERP ver2.0출시</td>
-									<td class="boardDate" style="">2023.5.29</td>
-								</tr>
-								<tr class="boardRow">
-									<td class="boardContent">사옥 이전날짜 확정</td>
-									<td class="boardDate">2023.06.11</td>
-								</tr>
-								<tr class="boardRow">
-									<td class="boardContent">보안의 날 참석 인원 확정</td>
-									<td class="boardDate">2023.6.11</td>
-								</tr>
-							
+							<table id="mydatalist">
+								<c:forEach var="board" items="${boardlist}">
+									<tr>
+										<td class="boardContent" style=""><a
+											href="/erp/board/read.do?board_no=${board.board_no}&state=READ">${board.title}</a></td>
+										<td class="boardDate" style="">${board.write_date}</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</div>

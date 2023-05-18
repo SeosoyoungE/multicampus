@@ -71,7 +71,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public boolean idCheck(String id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 

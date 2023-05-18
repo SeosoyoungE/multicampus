@@ -32,7 +32,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardDTO getBoardInfo(String board_no) {
-		return dao.read(board_no);
+		BoardDTO dto =  dao.read(board_no);
+		System.out.println(dto+"------------------------------");
+		return dto;
 	}
 
 	@Override
