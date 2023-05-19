@@ -26,7 +26,7 @@ public class MemberDTO {
 	private String phoneco;
 	private String phonecell;
 	private String email;
-	private String profile_photo;
+	private String profile_photo; //파일네임저장
 	private String deptname; //로그인 사용자의 부서정보
 	private String menupath; //로그인 사용자의 메뉴페이지정보
 	private String job_category;//로그인 사용자의 job분류정보
@@ -125,12 +125,10 @@ public class MemberDTO {
 	}
 
 	public String getId() {
-		System.out.println("==============getId()=============");
 		return id;
 	}
 
 	public void setId(String id) {
-		System.out.println("==============setId()=============");
 		this.id = id;
 	}
 

@@ -8,7 +8,7 @@
 		<put-attribute name="content" 
 			value="/WEB-INF/dept/dept_register.jsp"/>
 	</definition>
-	<definition name="dept/list" extends="mainTemplate">
+	<definition name="dept/dept_list" extends="mainTemplate">
 		<put-attribute name="menu" value="/WEB-INF/menu/insa_menu.jsp"/>
 		<put-attribute name="content" 
 			value="/WEB-INF/dept/deptlist.jsp"/>
@@ -22,5 +22,9 @@
 		<put-attribute name="menu" value="/WEB-INF/menu/insa_menu.jsp"/>
 		<put-attribute name="content" 
 			value="/WEB-INF/dept/dept_update.jsp"/>
+	</definition>
+	<definition name="dept/tree" extends="mainTemplate">
+		<put-attribute name="menu" value="/WEB-INF/menu/insa_menu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/dept/tree.jsp"/>
 	</definition>
 </tiles-definitions>

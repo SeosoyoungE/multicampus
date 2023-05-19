@@ -84,4 +84,10 @@ public class MemberServiceImpl implements MemberService {
 		return user;
 	}
 
+	@Override
+	public int insert(MemberDTO user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

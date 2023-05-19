@@ -45,7 +45,7 @@
 								</ul>
 			</c:when>
 			<c:otherwise>
-				<li><a href="/erp/emp/logout.do"><span
+				<li><a href="/erp/emp/spring/logout"><span
 						class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			</ul>
 
