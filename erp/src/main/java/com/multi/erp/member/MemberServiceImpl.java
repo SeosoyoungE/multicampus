@@ -35,8 +35,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean idCheck(String id) {
-		// TODO Auto-generated method stub
-		return false;
+		return dao.idCheck(id);
 	}
 
 	@Override
@@ -86,8 +85,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insert(MemberDTO user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.insert(user);
 	}
 
 }

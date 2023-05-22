@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.multi.erp.board.BoardFileDTO;
+import com.multi.erp.member.MemberDTO;
 
 @Service
 public class FileUploadLogicService {
@@ -28,8 +29,6 @@ public class FileUploadLogicService {
 				//파일명과 path를 이용해서 실제 file객체를 만든 후 업로드하기
 				//XXXXX/WEB-INF/upload +/+ 파일명
 				multipartFile.transferTo(new File(path+File.separator+storeFilename));
-				System.out.println("원본파일명: " + originalFilename);
-				System.err.println("저장파일명: "+storeFilename);
 				filedtolist.add(new BoardFileDTO(null,originalFilename,storeFilename,count+""));
 				count++;
 				
@@ -45,5 +44,15 @@ public class FileUploadLogicService {
 		return uuid + "." + ext;
 		
 	}
-
+	
+	public MemberDTO uploadFile(MultipartFile multipartFile,String path, MemberDTO member) throws IllegalStateException, IOException {
+		//경로와 파일을 set해줘야함
+		if (!multipartFile.isEmpty()) {
+			String originalFilename = multipartFile.getOriginalFilename(); //file의 오리지널 이름
+			String storeFilename = createStoreFilename(originalFilename); //dto에 저장할 저장이름
+			multipartFile.transferTo(new File(path+File.separator+storeFilename)); //오리지널 파일이름으로 저장
+			member.setProfile_photo(storeFilename);
+		}
+		return member;
+	}
 }

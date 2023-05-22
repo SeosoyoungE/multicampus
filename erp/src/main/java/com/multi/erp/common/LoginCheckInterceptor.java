@@ -25,7 +25,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		System.out.println("LOGINpost헨들러실행");
+		System.out.println("LOGIN체크interceptor post헨들러실행");
 	}
 
 	@Override

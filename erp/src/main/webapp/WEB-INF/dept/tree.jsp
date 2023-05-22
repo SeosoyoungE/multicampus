@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,11 +23,15 @@
 
 		<h4>조직도</h4>
 		<ul id="browser" class="filetree">
-			<li><span class="folder">Folder 1</span>
-				<ul>
-					<li><span class="file">Item 1.1</span></li>
-				</ul></li>
-			<li><span class="folder">Folder 2</span>
+			<c:forEach var="dept" items="${deptlist}">
+				<c:if test="${dept.deptlevel==1 }">
+					<li class="closed"><span class="folder">${dept.deptname}</span>
+						<ul id="${dept.deptno}">
+							<%-- <li><span class="file">${dept.deptname}</span></li> --%>
+						</ul></li>
+				</c:if>
+			</c:forEach>
+			<!-- <li><span class="folder">Folder 2</span>
 				<ul>
 					<li><span class="folder">Subfolder 2.1</span>
 						<ul id="folder21">
@@ -40,7 +45,7 @@
 				<ul>
 					<li><span class="file">File 3.1</span></li>
 				</ul></li>
-			<li><span class="file">File 4</span></li>
+			<li><span class="file">File 4</span></li> -->
 		</ul>
 
 

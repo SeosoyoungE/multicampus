@@ -1,9 +1,12 @@
 package com.multi.erp.member;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
+
+import com.multi.erp.common.FileUploadLogicService;
 
 import kr.multi.erp.dept.DeptDTO;
 import kr.multi.erp.dept.DeptService;
@@ -25,24 +33,51 @@ import kr.multi.erp.dept.DeptService;
 public class MemberController {
 
 	MemberService service;
-
+	FileUploadLogicService fileuploadservice;
+	DeptService deptService;
+	
 	public MemberController() {
 	}
 
 	@Autowired
-	public MemberController(MemberService service) {
+	public MemberController(MemberService service, FileUploadLogicService fileuploadservice, DeptService deptService) {
 		super();
 		this.service = service;
+		this.fileuploadservice = fileuploadservice;
+		this.deptService = deptService;
 	}
 
-	@Autowired
-	DeptService deptService;
 
 	@RequestMapping("/insert")
 	public String insertPage(Model model) {
 		List<DeptDTO> deptlist = deptService.select();
 		model.addAttribute("deptlist", deptlist);
-		return "member/insertPage";
+		return "member/insertPage"; //뷰
+	}
+
+	@RequestMapping("/insert.do")
+	public String insert(MemberDTO member, HttpSession session) throws IllegalStateException, IOException {
+		
+		MultipartFile file=member.getUserImage();
+		String path= WebUtils.getRealPath(session.getServletContext(), "/WEB-INF/upload");
+		
+		member=fileuploadservice.uploadFile(file, path, member);
+		service.insert(member, file, path, member.getProfile_photo());
+		
+		return "redirect:/emp/insert";
+	}
+	
+	@RequestMapping(value = "/id/check", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public String idCheck(String id) {
+		String msg="";
+		boolean member=service.idCheck(id);
+		if(member) {
+			msg="t";
+		}else {
+			msg="f";
+		}
+		return msg;
 	}
 
 	@GetMapping("/login.do")
@@ -112,8 +147,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/dept/tree.do")
-	public String showTree() {
-		
+	public String showTree(Model model) {
+		List<DeptDTO> deptlist = deptService.select();
+		model.addAttribute("deptlist", deptlist);
 		return "dept/tree"; //뷰
 	}
 	

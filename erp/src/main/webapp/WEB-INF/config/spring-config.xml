@@ -117,6 +117,9 @@
 			<exclude-mapping path="/board/list.do"/>
 			<exclude-mapping path="/emp/spring/login"/>
 			<exclude-mapping path="/emp/spring/logout"/>
+			<exclude-mapping path="/images/**"/>
+			<exclude-mapping path="/css/**"/>
+			<exclude-mapping path="/js/**"/>
 			<beans:bean class="com.multi.erp.common.LoginCheckInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>

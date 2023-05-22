@@ -50,7 +50,7 @@
 			</ul>
 
 			<span class="navbar-form pull-right"> <img class="img-circle"
-				style="width: 60px; height: 70px" src="/erp/images/${user.profile_photo}" />
+				style="width: 60px; height: 70px" src="/erp/upload/${user.profile_photo}" />
 			</span>
 			</c:otherwise>
 			</c:choose>

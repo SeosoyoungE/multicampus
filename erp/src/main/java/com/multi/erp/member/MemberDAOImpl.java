@@ -29,8 +29,8 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int insert(MemberDTO user) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("매퍼전: "+user);
+		return sqlSessionTemplate.insert("com.multi.erp.member.insert", user);
 	}
 
 	@Override
@@ -71,7 +71,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public boolean idCheck(String id) {
-		
+		if(sqlSessionTemplate.selectOne("com.multi.erp.member.idcheck",id)	==null) {
+			return true;
+		}
 		return false;
 	}
 
