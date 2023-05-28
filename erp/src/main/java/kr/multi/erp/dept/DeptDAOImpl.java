@@ -48,6 +48,11 @@ public class DeptDAOImpl implements DeptDAO {
 		return template.update(sql, dept.getMgr_id(), dept.getDeptaddr(), dept.getDepttel(), dept.getDeptno());
 	}
 
+	@Override
+	public List<DeptDTO> getSubDeptlist(String uppercode) {
+		return template.query("select * from dept where deptuppercode=?", new Object[] {uppercode},new DeptRowMapper());
+	}
+
 
 
 }

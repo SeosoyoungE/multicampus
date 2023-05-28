@@ -39,6 +39,12 @@ public class DeptServiceImpl implements DeptService {
 		return dao.update(dept);
 	}
 
+	@Override
+	public List<DeptDTO> getSubDeptlist(String uppercode) {
+		// TODO Auto-generated method stub
+		return dao.getSubDeptlist(uppercode);
+	}
+
 
 
 }

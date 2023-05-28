@@ -21,4 +21,7 @@
 		(#{id},#{pass},#{name},#{ssn},#{birthday},#{marry},null,null,null,null,sysdate(),null,
 		#{deptno},null,#{zipcode},#{addr},#{detailaddr},#{phonehome},#{phoneco},#{phonecell},#{email},#{profile_photo})
 	</insert>
+	<select id="treedata" parameterType="String" resultType="member">
+		select * from member2 where deptno=#{deptno}
+	</select>
 </mapper>

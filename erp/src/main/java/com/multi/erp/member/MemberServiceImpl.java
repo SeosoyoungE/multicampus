@@ -23,8 +23,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public List<MemberDTO> getTreeEmpList(String deptno) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getTreeEmpList(deptno);
 	}
 
 	@Override

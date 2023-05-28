@@ -12,6 +12,6 @@ public interface DeptDAO {
 	public int delete(String deptno);
 	public DeptDTO read(String deptno);
 	int update(DeptDTO dept);
-	
+	public List<DeptDTO> getSubDeptlist(String uppercode);
 	//  
 }

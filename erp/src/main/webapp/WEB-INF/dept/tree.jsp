@@ -16,7 +16,41 @@
 <script src="/erp/js/jquery.cookie.js"></script>
 <script src="/erp/js/jquery.treeview.js"></script>
 <script type="text/javascript" src="/erp/js/demo.js"></script>
-
+<script type="text/javascript">
+	$(document).ready(function() {
+		//selector가 class=folder인 객체를 클릭하면 실행되도록 정의
+		$(".folder").on("click",function(){
+			var ulcode=$(this).next();
+			var deptno=ulcode.attr("id");
+			$.ajax({
+				url:"/erp/emp/ajaxtreedata",
+				type: "get",
+				data:{"deptno":deptno},
+				success:function(resultdata){
+					jsonobj=JSON.parse(resultdata);
+					
+					myli="";
+					for(i in jsonobj.deptlist){
+						myli+="<li class='closed'>"
+						+ "<span class='folder'>"+jsonobj.deptlist[i].deptname+"</span>"
+						+"<ul id='"+jsonobj.deptlist[i].deptno+"'></ul></li>"
+					}
+					for(i in jsonobj.memberlist){
+						myli= myli+"<li>"
+						+ "<span class='file'>"+jsonobj.memberlist[i].name+"</span></li>"
+					}
+					$(ulnode).html(myli);
+					
+					$(document).on("click",".folder",function(){
+						var subulcode=$(this).next();
+						var subdeptno=subulcode.attr("id");
+						alert("부서선택: "+subdeptno)
+					})
+				}
+			})
+		})
+	})
+</script>
 </head>
 <body>
 	<div id="main">
@@ -28,7 +62,8 @@
 					<li class="closed"><span class="folder">${dept.deptname}</span>
 						<ul id="${dept.deptno}">
 							<%-- <li><span class="file">${dept.deptname}</span></li> --%>
-						</ul></li>
+						</ul>
+					</li>
 				</c:if>
 			</c:forEach>
 			<!-- <li><span class="folder">Folder 2</span>

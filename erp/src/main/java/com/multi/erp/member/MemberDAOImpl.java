@@ -23,8 +23,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public List<MemberDTO> getTreeEmpList(String deptno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("com.multi.erp.member.treedata", deptno);
 	}
 
 	@Override

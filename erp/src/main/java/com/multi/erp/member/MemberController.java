@@ -22,6 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.multi.erp.common.FileUploadLogicService;
 
 import kr.multi.erp.dept.DeptDTO;
@@ -153,5 +155,22 @@ public class MemberController {
 		return "dept/tree"; //뷰
 	}
 	
-	
+	//선택한 부서에 근무하는 직원목록고 선택한 부서의 하위부서목록을 JSON문자열로 리턴
+	@RequestMapping(value = "/ajaxtreedata", produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String getTreedata(String deptno) throws JsonProcessingException {
+		List<DeptDTO> deptlist= deptService.getSubDeptlist(deptno);
+		List<MemberDTO> memberlist=service.getTreeEmpList(deptno);
+		System.out.println("------------------");
+		System.out.println(deptlist);
+		System.out.println(memberlist);
+		
+		TreeDataDTO treedto = new TreeDataDTO(memberlist,deptlist);
+		ObjectMapper mapper=new ObjectMapper();
+		
+		String jsonStr= mapper.writeValueAsString(treedto);
+		System.out.println(jsonStr);
+		return jsonStr;
+		
+	}
 }
